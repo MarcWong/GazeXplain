@@ -4,10 +4,12 @@ import numpy as np
 import scipy.io as sio
 from skimage import io
 
-consolidated_answer_json_file = "/home/AiR/air-fixations/consolidated_answers.json"
-val_balanced_questions_json_file = "/home/AiR/questions1.2/val_balanced_questions.json"
-val_scene_graph_json_file = "/home/AiR/sceneGraphs/val_sceneGraphs.json"
-save_stimuli_file = "/home/AiR/stimuli"
+data_root = "/datasets/public/AiR"
+
+consolidated_answer_json_file = f"{data_root}/air-fixations/consolidated_answers.json"
+val_balanced_questions_json_file = f"{data_root}/questions1.2/val_balanced_questions.json" # not found
+val_scene_graph_json_file = f"{data_root}/sceneGraphs/val_sceneGraphs.json"
+save_stimuli_file = f"{data_root}/stimuli"
 
 with open(consolidated_answer_json_file) as json_file:
     consolidated_answer = json.load(json_file)
@@ -35,7 +37,7 @@ subject_id_to_idx = {value: iter for iter, value in enumerate(subject_id_list)}
 
 train_list = list()
 for qid_value in train:
-    fix_dir = os.path.join("/home/AiR/air-fixations/fix", qid_value)
+    fix_dir = os.path.join(f"{data_root}/air-fixations/fix", qid_value)
     fix_files = os.listdir(fix_dir)
     for fix_file in fix_files:
         subject_id_set.add(fix_file.split(".")[0])
@@ -84,7 +86,7 @@ for qid_value in train:
 
 validation_list = list()
 for qid_value in val:
-    fix_dir = os.path.join("/home/AiR/air-fixations/fix", qid_value)
+    fix_dir = os.path.join(f"{data_root}/air-fixations/fix", qid_value)
     fix_files = os.listdir(fix_dir)
     for fix_file in fix_files:
         subject_id_set.add(fix_file.split(".")[0])
@@ -132,7 +134,7 @@ for qid_value in val:
 
 test_list = list()
 for qid_value in test:
-    fix_dir = os.path.join("/home/AiR/air-fixations/fix", qid_value)
+    fix_dir = os.path.join(f"{data_root}/air-fixations/fix", qid_value)
     fix_files = os.listdir(fix_dir)
     for fix_file in fix_files:
         subject_id_set.add(fix_file.split(".")[0])
@@ -180,14 +182,16 @@ for qid_value in test:
 
 all_fixation_length = np.array(all_fixation_length)
 
-save_json_file = '/home/AiR/processed_data/AiR_fixations_train.json'
+os.makedirs(f"{data_root}/processed_data", exist_ok=True)
+
+save_json_file = f"{data_root}/processed_data/AiR_fixations_train.json"
 with open(save_json_file, 'w') as f:
     json.dump(train_list, f, indent=2)
 
-save_json_file = '/home/AiR/processed_data/AiR_fixations_validation.json'
+save_json_file = f"{data_root}/processed_data/AiR_fixations_validation.json"
 with open(save_json_file, 'w') as f:
     json.dump(validation_list, f, indent=2)
 
-save_json_file = '/home/AiR/processed_data/AiR_fixations_test.json'
+save_json_file = f"{data_root}/processed_data/AiR_fixations_test.json"
 with open(save_json_file, 'w') as f:
     json.dump(test_list, f, indent=2)

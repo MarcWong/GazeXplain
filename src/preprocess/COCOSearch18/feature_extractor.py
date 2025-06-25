@@ -59,8 +59,8 @@ def image_data(dataset_path, device='cuda:0', overwrite=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('Gazeformer Feature Extractor Utils', add_help=False)
-    parser.add_argument('--dataset_path', default='/home/COCO/TA', type=str)
-    parser.add_argument('--cuda', default=0, type=int)
+    parser.add_argument('--dataset_path', default='/datasets/public/COCOSearch18/TA', type=str)
+    parser.add_argument('--cuda', default=3, type=int)
     args = parser.parse_args()
     device = torch.device('cuda:{}'.format(args.cuda))
     image_data(dataset_path=args.dataset_path, device=device, overwrite=True)

@@ -16,7 +16,7 @@ test_image_names_list = ["1009.jpg", "1017.jpg", "1049.jpg", "1056.jpg", "1062.j
                          "1605.jpg", "1609.jpg", "1615.jpg", "1616.jpg", "1618.jpg", "1622.jpg", "1628.jpg",
                          "1637.jpg", "1640.jpg", "1657.jpg", "1663.jpg", "1677.jpg", "1682.jpg", "1699.jpg", ]
 
-data_root = '/home/OSIE'
+data_root = '/datasets/public/OSIE'
 mat_file = os.path.join(data_root, 'eye/fixations.mat')
 data = sio.loadmat(mat_file)
 fixations = data['fixations']
@@ -95,6 +95,7 @@ for example in fixations:
 
 data = train_list + val_list + test_list
 
-save_json_file = '/home/OSIE/processed/fixations.json'
+os.makedirs(f'{data_root}/processed', exist_ok=True)
+save_json_file = f'{data_root}/processed/fixations.json'
 with open(save_json_file, 'w') as f:
     json.dump(data, f, indent=2)

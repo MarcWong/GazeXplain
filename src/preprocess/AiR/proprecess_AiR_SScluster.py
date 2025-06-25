@@ -11,6 +11,8 @@ from sklearn.cluster import MeanShift, estimate_bandwidth
 
 warnings.filterwarnings("ignore")
 
+data_root = "/datasets/public/AiR"
+
 # https://github.com/cvlab-stonybrook/Scanpath_Prediction/issues/24
 def scanpath2clusters(meanshift, scanpath):
     string = []
@@ -65,9 +67,9 @@ def compute_clusters(gt_scanpaths):
     return best_ms, gt_strings, subjects
 
 
-
-fixation_root = '/home/AiR/processed_data'
-processed_root = '/home/AiR/processed_data'
+fixation_root = f"{data_root}/processed_data"
+processed_root = f"{data_root}/processed_data"
+os.makedirs(processed_root, exist_ok=True)
 
 train_json_data = os.path.join(fixation_root, 'AiR_fixations_train.json')
 valid_json_data = os.path.join(fixation_root, 'AiR_fixations_validation.json')

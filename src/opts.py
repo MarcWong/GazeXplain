@@ -4,7 +4,7 @@ import argparse
 def parse_opt():
     parser = argparse.ArgumentParser(description="Scanpath prediction for images")
     parser.add_argument("--mode", type=str, default="train", help="Selecting running mode (default: train)")
-    parser.add_argument('--dataset_dir', default="/home/", help='feature folder')
+    parser.add_argument('--dataset_dir', default="/datasets/public/", help='feature folder')
     parser.add_argument('--datasets', default=["AiR-D", "OSIE", "COCO-TP", "COCO-TA"], nargs='+', help='used dataset')
     parser.add_argument('--tiny', action="store_true", help='use the tiny dataset in debug')
 

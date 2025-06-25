@@ -66,17 +66,18 @@ def compute_clusters(gt_scanpaths):
 
 
 
-fixation_root = '/home/COCO/TA/fixations'
-processed_root = '/home/COCO/TA/processed'
+fixation_root = '/datasets/public/COCOSearch18/TA/fixations'
+processed_root = '/datasets/public/COCOSearch18/TA/processed'
+os.makedirs(processed_root, exist_ok=True)
 
 trainval_json_data = os.path.join(fixation_root, 'coco_search18_fixations_TA_trainval.json')
-test_json_data = os.path.join(fixation_root, 'coco_search18_fixations_TA_test.json')
+# test_json_data = os.path.join(fixation_root, 'coco_search18_fixations_TA_test.json')
 
 fixations = []
 with open(trainval_json_data, "r") as f:
     fixations += json.load(f)
-with open(test_json_data, "r") as f:
-    fixations += json.load(f)
+# with open(test_json_data, "r") as f:
+#     fixations += json.load(f)
 
 
 target_height = 384

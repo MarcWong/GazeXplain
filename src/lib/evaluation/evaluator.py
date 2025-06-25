@@ -58,9 +58,9 @@ class Evaluator(object):
                                         allow_pickle=True).item()
         self.OSIE_fix_clusters = np.load(os.path.join(opt.dataset_dir, "OSIE", "processed", 'clusters.npy'),
                                         allow_pickle=True).item()
-        self.COCOTP_fix_clusters = np.load(os.path.join(opt.dataset_dir, "COCO/TP", "processed", 'clusters.npy'),
+        self.COCOTP_fix_clusters = np.load(os.path.join(opt.dataset_dir, "COCOSearch18/TP", "processed", 'clusters.npy'),
                                            allow_pickle=True).item()
-        self.COCOTA_fix_clusters = np.load(os.path.join(opt.dataset_dir, "COCO/TA", "processed", 'clusters.npy'),
+        self.COCOTA_fix_clusters = np.load(os.path.join(opt.dataset_dir, "COCOSearch18/TA", "processed", 'clusters.npy'),
                                            allow_pickle=True).item()
 
 
@@ -158,7 +158,7 @@ class Evaluator(object):
 
             # get SemSS score
             if dataset in ["COCO-TP", "COCO-TA"]:
-                segmentation_map_dir = os.path.join(self.opt.dataset_dir, "COCO/TP", "semantic_seq_full/segmentation_maps")
+                segmentation_map_dir = os.path.join(self.opt.dataset_dir, "COCOSearch18/TP", "semantic_seq_full/segmentation_maps")
                 SSS = self.compute_SSS(_pred, _gt, fixation_info=fixation_info[idx], truncate=self.opt.max_length,
                                        segmentation_map_dir=segmentation_map_dir)
                 SSS_Time = self.compute_SSS_Time(_pred, _gt, fixation_info=fixation_info[idx], truncate=self.opt.max_length,

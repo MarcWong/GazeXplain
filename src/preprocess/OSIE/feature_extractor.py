@@ -11,7 +11,7 @@ import argparse
 
 
 class ResNetCOCO(nn.Module):
-    def __init__(self, device="cuda:0"):
+    def __init__(self, device="cuda:3"):
         super(ResNetCOCO, self).__init__()
         self.resnet = maskrcnn_resnet50_fpn(weights=MaskRCNN_ResNet50_FPN_Weights.COCO_V1).backbone.body.to(device)
         self.device = device
@@ -34,10 +34,11 @@ class ResNetCOCO(nn.Module):
         return x
 
 
-def image_data(dataset_path, device='cuda:0', overwrite=False):
+def image_data(dataset_path, device='cuda:3', overwrite=False):
     resize_dim = (384 * 2, 512 * 2)
     src_path = join(dataset_path, 'stimuli/')
     target_path = join(dataset_path, 'image_features/')
+    os.makedirs(target_path, exist_ok=True)
     resize = T.Resize(resize_dim)
     normalize = T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
@@ -52,13 +53,12 @@ def image_data(dataset_path, device='cuda:0', overwrite=False):
         features = bbone(tensor_image).squeeze().detach().cpu()
         torch.save(features, join(target_path, f.replace('jpg', 'pth')))
 
-        
-        
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('Gazeformer Feature Extractor Utils', add_help=False)
-    parser.add_argument('--dataset_path', default= '/home/OSIE', type=str)
+    parser.add_argument('--dataset_path', default= '/datasets/public/OSIE', type=str)
     parser.add_argument('--cuda', default=0, type=int)
     args = parser.parse_args()
     device = torch.device('cuda:{}'.format(args.cuda))
     image_data(dataset_path = args.dataset_path, device=device, overwrite = True)
-

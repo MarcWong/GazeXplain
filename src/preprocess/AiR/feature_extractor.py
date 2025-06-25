@@ -58,6 +58,7 @@ def image_data(dataset_path, device='cuda:0', overwrite=False):
 def text_data(dataset_path, device='cuda:0', lm_model='sentence-transformers/stsb-roberta-base-v2'):
     # src_path = join(dataset_path, 'images/')
     # tasks = [' '.join(i.split('_')) for i in os.listdir(src_path) if isdir(join(src_path, i))]
+    os.makedirs(join(dataset_path, 'processed_data'), exist_ok=True)
 
     lm = SentenceTransformer(lm_model, device=device).eval()
     embed_dict = {}
@@ -78,9 +79,9 @@ def text_data(dataset_path, device='cuda:0', lm_model='sentence-transformers/sts
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('Gazeformer Feature Extractor Utils', add_help=False)
-    parser.add_argument('--dataset_path', default='/srv/data/AiR', type=str)
+    parser.add_argument('--dataset_path', default='/datasets/public/AiR', type=str)
     parser.add_argument('--lm_model', default='sentence-transformers/stsb-roberta-base-v2', type=str)
-    parser.add_argument('--cuda', default=0, type=int)
+    parser.add_argument('--cuda', default=3, type=int)
     args = parser.parse_args()
     device = torch.device('cuda:{}'.format(args.cuda))
     # image_data(dataset_path = args.dataset_path, device = device, overwrite = True)

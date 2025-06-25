@@ -181,7 +181,7 @@ class UnifiedScanpath(Dataset):
             fixation["width"] = 512
 
         # explanation
-        cocotp_explanation_dir = os.path.join(self.opt.dataset_dir, "COCO/TP", "processed")
+        cocotp_explanation_dir = os.path.join(self.opt.dataset_dir, "COCOSearch18/TP", "processed")
         with open(join(cocotp_explanation_dir, "explanation.json"), "r") as f:
             cocotp_explanations = json.load(f)
 
@@ -227,7 +227,7 @@ class UnifiedScanpath(Dataset):
 
 
         ########## for COCO-Search18 TA ##########
-        cocosearch18_TA_fixation_dir = os.path.join(self.opt.dataset_dir, "COCO", "TA", "fixations")
+        cocosearch18_TA_fixation_dir = os.path.join(self.opt.dataset_dir, "COCOSearch18", "TA", "fixations")
         if self.split in ["train", "validation"]:
             with open(join(cocosearch18_TA_fixation_dir, "coco_search18_fixations_TA_trainval.json"), "r") as f:
                 cocosearch18_TA_fixations = json.load(f)
@@ -253,7 +253,7 @@ class UnifiedScanpath(Dataset):
 
 
         # explanation
-        cocota_explanation_dir = os.path.join(self.opt.dataset_dir, "COCO/TA", "processed")
+        cocota_explanation_dir = os.path.join(self.opt.dataset_dir, "COCOSearch18/TA", "processed")
         with open(join(cocota_explanation_dir, "explanation.json"), "r") as f:
             cocota_explanations = json.load(f)
 
@@ -351,10 +351,10 @@ class UnifiedScanpath(Dataset):
             img_path = join(self.opt.dataset_dir, "OSIE", "image_features", img_name.replace('jpg', 'pth'))
         elif dataset == "COCO-TP":
             img_name = fixation["name"]
-            img_path = join(self.opt.dataset_dir, "COCO", "image_features", img_name.replace('jpg', 'pth'))
+            img_path = join(self.opt.dataset_dir, "COCOSearch18", "image_features", img_name.replace('jpg', 'pth'))
         elif dataset == "COCO-TA":
             img_name = fixation["name"]
-            img_path = join(self.opt.dataset_dir, "COCO", "image_features", img_name.replace('jpg', 'pth'))
+            img_path = join(self.opt.dataset_dir, "COCOSearch18", "image_features", img_name.replace('jpg', 'pth'))
         else:
             raise "Invalid Dataset"
 

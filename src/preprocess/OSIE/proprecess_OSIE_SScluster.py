@@ -66,8 +66,8 @@ def compute_clusters(gt_scanpaths):
 
 
 
-fixation_root = '/home/OSIE/processed'
-processed_root = '/home/OSIE/processed'
+fixation_root = '/datasets/public/OSIE/processed'
+processed_root = '/datasets/public/OSIE/processed'
 
 json_data = os.path.join(fixation_root, 'fixations.json')
 fixations = []
@@ -100,5 +100,3 @@ for key, value in tqdm(data_dict.items()):
     }
 
 np.save(join(processed_root, 'clusters.npy'), clusters, allow_pickle=True)
-
-
