@@ -166,7 +166,8 @@ class UnifiedScanpath(Dataset):
             fixation["task_description"] = task_description
 
         ########## for COCO-Search18 TP ##########
-        cocosearch18_TP_fixation_dir = os.path.join(self.opt.dataset_dir, "COCO", "TP", "fixations")
+        cocosearch18_TP_fixation_dir = os.path.join(self.opt.dataset_dir, "COCOSearch18", "TP", "fixations")
+        print(self.split)
         with open(join(cocosearch18_TP_fixation_dir, "coco_search18_fixations_TP_{}.json".format(self.split)), "r") as f:
             cocosearch18_TP_fixations = json.load(f)
 
