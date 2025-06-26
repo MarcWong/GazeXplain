@@ -18,11 +18,10 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 parser = argparse.ArgumentParser(description="Scanpath evaluation")
 parser.add_argument('--save_metric', action='store_false')
-parser.add_argument('--split', default='validation')
+parser.add_argument('--split', default='test') # changed it to validation as the test split for COCO-Search18 dataset is not available for download
 parser.add_argument("--test_batch", type=int, default=16, help="Batch size")
 parser.add_argument('--dataset_dir', default="/datasets/public/", help='feature folder')
-# parser.add_argument('--datasets', default=["AiR-D", "OSIE", "COCO-TP", "COCO-TA"], nargs='+', help='used dataset')
-parser.add_argument('--datasets', default=["OSIE"], nargs='+', help='used dataset')
+parser.add_argument('--datasets', default=["AiR-D", "OSIE", "COCO-TP", "COCO-TA"], nargs='+', help='used dataset')
 parser.add_argument("--eval_repeat_num", type=int, default=1, help="Repeat number for evaluation")
 parser.add_argument('--tiny', action="store_true", help='use the tiny dataset in debug')
 parser.add_argument("--seed", type=int, default=0, help="Random seed")
@@ -80,7 +79,6 @@ def main():
         else:
             save_path = None
 
-        opt.split = 'validation'
         eval(accelerator, model_path, opt, split=opt.split, save_path=save_path)
 
 
